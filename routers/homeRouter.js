@@ -7,21 +7,20 @@ Router.get('/', (err, res) => {
 })
 
 
-Router.post('/register', async(req, res) => {
+Router.post('/register', async (req, res) => {
     try {
         const {
             name,
             number,
             email,
-            passsword,
+            password,
             cpassword
         } = req.body;
         console.log(name,
             number,
             email,
-            passsword,
-            cpassword);
-        if (passsword === cpassword) {
+            password);
+        if (password === cpassword) {
             // const userData = new homeSchema({
             //     name,
             //     number,
@@ -40,9 +39,10 @@ Router.post('/register', async(req, res) => {
                     name,
                     number,
                     email,
-                    passsword,
+                    password,
                 })
                 console.log('register', { title: 'sory this email_id already used', password: '', email: '' })
+                return res.render('login')
             } catch (error) {
                 res.render('register', { title: 'Done', password: '', email: '' })
             }
@@ -53,6 +53,7 @@ Router.post('/register', async(req, res) => {
 
 
     } catch (error) {
+        console.log(error);
         res.render('register', { title: 'Error in code', password: '', email: '' })
     }
 })
